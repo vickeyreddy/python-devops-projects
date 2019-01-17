@@ -2,7 +2,7 @@ from autotags import AutoTagAWSResources
 import argparse
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='PROG', usage='%(prog)s [options]', description='Python Boto3 AWS Framework')
     parser.add_argument('--key', action='store', dest='key', help='AWS Key')
     parser.add_argument('--secret', action='store', dest='secret', help='AWS Secret')

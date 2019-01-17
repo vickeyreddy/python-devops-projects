@@ -1,6 +1,7 @@
 import boto3
 import logging
 import threading
+import argparse
 from botocore.exceptions import ClientError
 
 FORMAT = "[%(levelname)-s %(asctime)-s %(threadName)-s ] %(message)s"
@@ -9,7 +10,6 @@ logging.basicConfig(filename='ec2-tagging.logs', level=logging.INFO, format=FORM
 
 class AutoTagAWSResources(object):
 
-    global instances
     instances = {}
 
     def __init__(self, key, secret):
@@ -51,12 +51,12 @@ class AutoTagAWSResources(object):
             response = conn.describe_instances()
             for reservation in response["Reservations"]:
                 for instance in reservation["Instances"]:
-                    instances[instance['InstanceId']] = region
+                    self.instances[instance['InstanceId']] = region
                     logging.info("Fetched {} EC2 instance of AWS {} Region".format(instance['InstanceId'], region))
         except ClientError as e:
             logging.error("Connection Error : {}".format(e))
         else:
-            return instances
+            return self.instances
 
     def get_all_instances(self):
         threads = []
@@ -68,7 +68,7 @@ class AutoTagAWSResources(object):
 
         for thread in threads:
             thread.join()
-        return instances
+        return self.instances
 
     def get_resource_owner(self, instance_id, region):
         owner = None
