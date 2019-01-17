@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+   <div class="row">
+    <div class="col-xs-6 col-md-3">
+     <div class="panel">
+      <div class="easypiechart-panel">
+     	<h4><strong>Enviornments</strong></h4>
+	 <div class="easypiechart" id="easypiechart-blue" data-percent={{ total_envs }} ><span class="percent">{{ total_envs }}</span>
+	</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-6 col-md-3">
+   <div class="panel">
+    <div class="easypiechart-panel">
+     <h4><strong>Farms</strong></h4>
+       <div class="easypiechart" id="easypiechart-orange" data-percent={{ total_frms }}><span class="percent">{{ total_frms }}</span>
+      </div>
+     </div>
+   </div>
+ </div>
+ <div class="col-xs-6 col-md-3">
+   <div class="panel">
+     <div class="easypiechart-panel">
+      <h4><strong>Farm Roles</strong></h4>
+	<div class="easypiechart" id="easypiechart-teal" data-percent={{ total_frmroles }}><span class="percent">{{ total_frmroles }}</span>
+	</div>
+      </div>
+    </div>
+   </div>
+  <div class="col-xs-6 col-md-3">
+    <div class="panel">
+     <div class="easypiechart-panel">
+	<h4><strong>Servers</strong></h4>
+	<div class="easypiechart" id="easypiechart-red" data-percent={{ total_servers }} ><span class="percent">{{ total_servers }}</span>
+	</div>
+     </div>
+    </div>
+  </div>
+</div><!--/.row-->
+ <div class="row">
+  <!--div class="col-xs-6 col-md-3"-->
+    <table id="simple-table" class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th class="center col-xs-6 col-md-3">EnvironmentName</th>
+			<th class="center col-xs-6 col-md-3">FarmName</th>
+			<th class="center col-xs-6 col-md-3">FarmRoleName</th>
+			<th class="center col-xs-6 col-md-3">ServerIP</th>
+		</tr>
+	</thead>
+	<tbody>
+	  {% for s in servers_list %}
+	    {% if s.s_status == "Running" %}
+		<tr>
+		        <td class="center">{{ s.ename }}</td>
+		        <td class="center">{{ s.fname }}</td>
+			<td class="center">{{ s.frname }}</td>
+			<td class="center"><a href="/dashboard/serverinfo/{{s.sip}}/" target="_blank">{{ s.sip }}</a></td>
+		</tr>
+	   {% endif %}
+	 {% endfor %}
+	</tbody>
+   </div>
+  </div><!-- /.col -->
+ </div><!-- /.row -->
+{% endblock %}
+{% block script %}
+        <script>
+                $(document).ready(function() {
+                   $('#simple-table').DataTable();
+                } );
+        </script>
+{% endblock %}

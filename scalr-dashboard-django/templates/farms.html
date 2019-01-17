@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+   <div class="row">
+     <div class="col-md-12">
+	<table id="simple-table" class="table table-bordered table-hover">
+		<thead>
+		   <tr>
+			<th class="detail-col">S.No.</th>
+			<th class="detail-col">FarmID</th>
+			<th class="detail-col">Environment Name</th>
+			<th class="detail-col">Farm Name</th>
+			<th class="detail-col">Farm Detail</th>
+			<th class="detail-col">Farm Status</th>
+		   </tr>
+		</thead>
+		<tbody>
+		   {% for f in farm_list %}
+		    <tr>
+			<td class="center">{{ forloop.counter }}</td>
+			<td class="center">{{ f.fid }}</td>
+			<td class="center">{{ f.ename }}</td>
+			<td class="center">{{ f.f_name }}</td>
+			<td class="center">{{ f.f_dis }}</td>
+      		   {% if f.f_status == "Stopped" %}
+			<td class="center">
+				<span class="label label-sm label-danger">{{ f.f_status }}</span>
+			</td>
+		   {% else %}
+			<td class="center">
+				<span class="label label-sm label-success">{{ f.f_status }}</span>
+			</td>
+		   {% endif %}
+		   </tr>
+		{% endfor %}
+	  </tbody>
+	</table>
+    </div><!-- /.col -->
+ </div><!-- /.row -->
+{% endblock %}
+{% block script %}
+   	<script>
+		$(document).ready(function() {
+		   $('#simple-table').DataTable();
+		} );
+	</script>
+{% endblock %}

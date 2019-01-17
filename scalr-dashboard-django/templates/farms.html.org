@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block head %}
+    <link href="{% static 'css/scalr.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+		<br><h3 align="center"><b> Tech Solutions Scalr {{ title }} Details </b></h3></br>
+	<table class="table table-bordered" style="font-family:Georgia;font-size:120%;width:100%">
+                                        <thead>
+                                          <tr class="info">
+                                                <th>FarmID</th>
+                                                <th>Env Name</th>
+						<th>Farm Name</th>
+						<th>Farm Detail</th>
+						<th>Farm Status</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for f in farm_list %}
+                                          <tr>
+                                                <td width="5%">{{ f.fid }}</td>
+                                                <td width="15%">{{ f.ename }}</td>
+                                                <td width="20%">{{ f.f_name }}</td>
+                                                <td width="50%">{{ f.f_dis }}</td>
+						{% if f.f_status == "Stopped" %}
+                                                        <td bgcolor="#FF0000" width="10%">{{ f.f_status }}</td>
+						{% else %}
+							<td width="10%">{{ f.f_status }}</td>
+						{% endif %}
+                                          </tr>
+                                        {% endfor %}
+                                        </tbody>
+         </table>
+{% endblock %}

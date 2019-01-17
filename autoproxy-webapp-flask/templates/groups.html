@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% block script %}
+<script type="text/javascript">
+      $(document).ready(function(){
+          $("#CreateForm .btn").click(function(){
+              $(this).button('loading').delay(5000).queue(function() {
+                  $(this).button('reset');
+                  $(this).dequeue();
+              });
+          });
+      });
+</script>
+<script type="text/javascript">
+      $(document).ready(function(){
+          $("#DeleteForm .btn").click(function(){
+              $(this).button('loading').delay(5000).queue(function() {
+                  $(this).button('reset');
+                  $(this).dequeue();
+              });
+          });
+      });
+</script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class = "panel panel-primary" style="margin: 10px;">
+                <div class="panel-heading">Create GroupID</div>
+                    <div class="panel-body">
+                        <div class="container">
+                            <div class="col-sm-6">
+                             <form id="CreateForm" class="form-horizontal" action="" method="post">
+                                 <div class="form-group">
+                                        <label class="control-label col-sm-4" for="text">Subnet Address:</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" id="subnet" class="form-control" placeholder="Enter Subnet Address" required="required" name="subnet">
+                                        <input type="checkbox" class="check_box" name="mod_buid">Change buissines unit ID
+                                    </div>
+                                </div>
+                                <div class="form-group" id="textbox_buid" style="display:none">
+                                        <label class="control-label col-sm-4" for="bid">Business UnitID:</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" id="bid" class="form-control" name="bid" required="required" value="1750623" >
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-4">
+                                       <button type="submit" class="btn btn-primary" name="Create" value="Create">Create</button>
+                                    </div>
+                                 </div>
+                              </form>
+                           </div>
+                        </div>
+					           </div>
+				        </div>
+                <p style="font-family: Georgia; margin: 30px;">
+                  {% if result_create %}
+                    {% if "Failure" in result_create %}
+                      <div class="alert alert-danger" style="font-family: Georgia; margin: 30px;">
+                        <br><stronge>{{ result_create }}</stronge></br>
+                      </div>
+                    {% elif "Error" in result_delete %}
+                          <div class="alert alert-danger" style="font-family: Georgia; margin: 30px;">
+                            <br><stronge>{{ result_create }}</stronge></br>
+                          </div>
+                    {% else %}
+                      <div class="alert alert-success" style="font-family: Georgia; margin: 30px;">
+                        <br><stronge>{{ result_create }}</stronge></br>
+                      </div>
+                    {% endif %}
+                  {% endif %}
+                </p>
+      </div>
+      <div class="col-sm-6">
+          <div class = "panel panel-primary" style="margin: 10px;">
+              <div class="panel-heading">Delete GroupID</div>
+                  <div class="panel-body">
+                      <div class="container">
+                          <div class="col-sm-6">
+                           <form id="DeleteForm" class="form-horizontal" action="" method="post">
+                               <div class="form-group">
+                                        <label class="control-label col-sm-4" for="text">GroupID:</label>
+                                 <div class="col-sm-6">
+                                        <input type="text" id="gid" class="form-control" placeholder="Enter GroupID" required="required" name="gid">
+                                 </div>
+                               </div>
+                               <div class="form-group">
+             											<label class="control-label col-sm-4" for="uid">Subnet Address:</label>
+             									<div class="col-sm-6">
+             											<input type="text" id="subnet2" class="form-control" placeholder="Subnet Address" required="required" name="subnet2">
+             									</div>
+             									</div>
+                              <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-4">
+                                     <button type="submit" class="btn btn-primary" name="Delete" value="Delete">Delete</button>
+                               </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <p style="font-family: Georgia; margin: 30px;">
+                {% if result_delete %}
+                  {% if "Failure" in result_delete %}
+                    <div class="alert alert-danger" style="font-family: Georgia; margin: 30px;">
+                      <br><stronge>{{ result_create }}</stronge></br>
+                    </div>
+                  {% elif "Error" in result_delete %}
+                      <div class="alert alert-danger" style="font-family: Georgia; margin: 30px;">
+                        <br><stronge>{{ result_create }}</stronge></br>
+                      </div>
+                  {% else %}
+                    <div class="alert alert-success" style="font-family: Georgia; margin: 30px;">
+                      <br><stronge>{{ result_delete }}</stronge></br>
+                    </div>
+                  {% endif %}
+                {% endif %}
+              </p>
+          </div>
+      </div>
+      <script>
+          $('input[name="mod_buid"]').click(function(event) {
+          if ($('.check_box')[0].checked == true) {
+            $('#textbox_buid').css('display', 'block');
+          }else{
+            $('#textbox_buid').css('display', 'none');
+          }});
+      </script>
+
+{% endblock %}

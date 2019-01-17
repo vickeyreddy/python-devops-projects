@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+   <div class="row">
+    <div class="col-md-12">
+      <table id="simple-table" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="detail-col">S.No.</th>
+                <th class="detail-col">Key</th>
+                <th class="detail-col">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for k,v in sinfo.items %}
+            <tr>
+                <td class="center">{{ forloop.counter }}</td>
+                <td class="center">{{ k }}</td>
+                <td class="center">{{ v }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  </div><!-- /.col -->
+ </div><!-- /.row -->
+{% endblock %}
+{% block script %}
+        <script>
+                $(document).ready(function() {
+                   $('#simple-table').DataTable();
+                } );
+        </script>
+{% endblock %}

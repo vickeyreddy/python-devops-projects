@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+   <div class="row">
+    <div class="col-md-12">
+      <table id="simple-table" class="table table-bordered table-hover">
+        <thead>
+	    <tr>
+		<th class="detail-col">S.No.</th>
+		<th class="detail-col">EnvironmentName</th>
+		<th class="detail-col">FarmName</th>
+		<th class="detail-col">FarmRoleName</th>
+		<th class="detail-col">IPAddress</th>
+		<th class="detail-col">Status</th>
+		<th class="detail-col">Uptime</th>
+		<th class="detail-col">InstnaceType</th>
+	    </tr>
+	</thead>
+	<tbody>
+	{% for s in servers_list %}
+	    <tr>
+		<td class="center">{{ forloop.counter }}</td>
+		<td class="center">{{ s.ename }}</td>
+		<td class="center">{{ s.fname }}</td>
+		<td class="center">{{ s.frname }}</td>
+		<td class="center">
+			<a href="/dashboard/serverinfo/{{s.sip}}/" target="_blank">{{ s.sip }}</a>
+		</td>
+		{% if s.s_status == "Suspended" %}
+		 	<td class="center">
+				<span class="label label-sm label-danger">{{ s.s_status }}</span>
+			</td>
+		{% elif s.s_status == "Initializing" %}
+			<td class="center">
+				<span class="label label-sm label-warning">{{ s.s_status }}</span>
+			</td>
+		{% elif s.s_status == "Terminated" %}
+			<td class="center">
+				<span class="label label-sm label-danger">{{ s.s_status }}</span>
+			</td>
+		{% else %}
+			<td class="center">
+				<span class="label label-sm label-success">{{ s.s_status }}</span>
+			</td>
+                {% endif %}
+		<td class="center">{{ s.uptime }}</td>
+		<td class="center">{{ s.s_type }}</td>
+    	    </tr>
+	{% endfor %}
+	</tbody>
+    </table>
+  </div><!-- /.col -->
+ </div><!-- /.row -->
+{% endblock %}
+{% block script %}
+        <script>
+                $(document).ready(function() {
+                   $('#simple-table').DataTable();
+                } );
+        </script>
+{% endblock %}

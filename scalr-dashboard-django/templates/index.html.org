@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block head %}
+    <script src="{% static 'js/jquery-2.1.4.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/pie-chart.js' %}" type="text/javascript"></script>
+    <link href="{% static 'css/scalr.css' %}" rel="stylesheet">
+    <script src="{% static 'js/scalr.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="/dashboard">Scalr Overview<span class="sr-only">(current)</span></a></li>
+            <li><a href="https://nexus.cloud.corporate.ge.com/nexus/#welcome" target="_blank">Cloud-Nexus</a></li>
+            <li><a href="https://chef.cloud.corporate.ge.com/login" target="_blank">Cloud-Chef</a></li>
+            <li><a href="https://gitlab.cloud.corporate.ge.com/users/sign_in" target="_blank">Cloud-Gitlab</a></li>
+            <li><a href="https://metrics.cloud.corporate.ge.com/" target="_blank">Cloud-Metrics</a></li>
+            <li><a href="https://jenkins.cloud.corporate.ge.com/jenkins/" target="_blank">Cloud-Jenkins</a></li>
+            <li><a href="https://eut-monitor.cloud.corporate.ge.com/" target="_blank">Cloud-Monitoring</a></li>
+            <li><a href="http://wiki.corporate.ge.com/wiki/AWS_Techsolutions_Devops" target="_blank">Cloud-Wiki</a></li>
+          </ul>
+	  <ul class="nav nav-sidebar">
+            <li><a href="#">Corp-Slack</a></li>
+            <li><a href="#">Corp-Gitlab</a></li>
+            <li><a href="#">Corp-Jenkins</a></li>
+            <li><a href="#">Corp-GERepo</a></li>
+            <li><a href="#">Corp-Monitoring</a></li>
+          </ul>
+        </div>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h3 class="page-header"><b>TechSolns DevOps Scalr Dashboard</b></h3>
+	    <script>
+	    </script>
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3">
+		<div id="demo-pie-1" class="pie-title-center" data-percent={{ total_envs }}> <span class="pie-value"></span></div>
+		 <h4><b>Environments</b></h4>
+        </div>
+            <div class="col-xs-6 col-sm-3">
+		<div id="demo-pie-2" class="pie-title-center" data-percent={{ total_frms }}> <span class="pie-value"></span> </div><br>
+         	<h4><b>Farms</b></h4>
+            </div>
+            <div class="col-xs-6 col-sm-3 full-circle">
+		<div id="demo-pie-3" class="pie-title-center" data-percent={{ total_frmroles }}> <span class="pie-value"></span> </div>
+              <h4><b>Farm Roles</b></h4>
+            </div>
+            <div class="col-xs-6 col-sm-3 full-circle">
+		<div id="demo-pie-4" class="pie-title-center" data-percent={{ total_servers }}> <span class="pie-value"></span> </div>
+              <h4><b>Servers</b></h4>
+            </div>
+          </div>
+
+          <!--h4 class="sub-header"><b>Scalr Overview</b></h4-->
+          <div class="table-responsive">
+            <table class="table table-striped" style="font-family:Georgia;font-size:120%;width:100%">
+              <thead>
+		<tr>
+                  <!--th>S.No</th-->
+                  <th>EnvsName</th>
+                  <th>FarmsName</th>
+                  <th>FarmRolesName</th>
+                  <th>ServerIP</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for s in servers_list %}
+		    {% if s.s_status == "Running" %}
+                          <tr>
+			    <td width="25%">{{ s.ename }}</td>
+			    <td width="25%">{{ s.fname }}</td>
+			    <td width="25%">{{ s.frname }}</td>
+			    <td width="15%"><a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">{{ s.sip }}</a></td>
+			 </tr>
+		    {% endif %}
+                  {% endfor %}
+              </tbody>
+            </table>
+	    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  		<div class="modal-dialog modal-lg">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+	        <h4 class="modal-title" id="myModalLabel"><b>TechSolns DevOps Server Statics</b></h4>
+      	</div>
+      	<div class="modal-body">
+        	...
+      	</div>
+	      <div class="modal-footer">
+	       	<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      	      </div>
+    	</div>
+     </div>
+   </div>
+  </div>
+ </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+              <meta charset="utf-8">
+              <meta http-equiv="X-UA-Compatible" content="IE=edge">
+              <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+              <meta name="description" content="GE-Digital InternalDashboard">
+              <meta name="author" content="Vijay Singh Gosai">
+              <link rel="stylesheet" href="{{ url_for ('static', filename='css/bootstrap.min.css') }}">
+              <script src="{{ url_for ('static', filename='js/jquery.min.js') }}"></script>
+              <script src="{{ url_for ('static', filename='js/bootstrap.min.js') }}"></script>
+              <link rel="icon" href="{{ url_for ('static', filename='images/icon.ico') }}">
+              <title>AutoProxy Tool</title>
+              {% block script %}
+
+              {% endblock %}
+    </head>
+    <body>
+          <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a><img style="max-width:50px; marigin-top: -7px;" src="{{ url_for ('static', filename='images/icon.ico') }}"></a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a><strong>GE Imagination at work</strong></a></li>
+                </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/groups">Manage GroupID</a></li>
+                    <li><a href="/subnets">Manage Subnet</a></li>
+                    <li><a href="http://autoproxy.ge.com/" target="_blank">AutoProxy Home</a></li>
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                  </ul>
+              </div>
+          </nav>
+            <h2>AutoProxy FrontEnd Tool</h2>
+            <div>
+              <h4><b>A Simple Tool to Create/Delete/Search Subnets !!!</b></h3>
+                {% block content %}
+                {% endblock %}
+          </div>
+        </body>
+  </html>

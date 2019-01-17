@@ -1,0 +1,8 @@
+- sep_api:
+   api_url: https://sep1.example.com
+   api_user: user1
+   api_pass: passwd1
+- sc_api:
+   api_url: https://sep2.example.com
+   api_user: user2
+   api_pass: pass2

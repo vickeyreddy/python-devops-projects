@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block head %}
+    <link href="{% static 'css/scalr.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+	</br><h3 align="center"><b>Tech Solutions Scalr {{ title }} Details</b></h3>
+		 <table class="table table-bordered" style="font-family:Georgia;font-size:120%;width:100%">
+			<thead>
+			  <tr class="info">
+				<th>EnvName</th>
+				<th>FarmName</th>
+				<th>FarmRoleName</th>
+				<th>IPAddress</th>
+				<th>Status</th>
+				<th>Uptime</th>
+				<th>IType</th>
+			  </tr>
+			  <tbody>
+                              {% for s in servers_list %}
+                                <tr>
+                                   <td width="15%">{{ s.ename }}</td>
+                                   <td width="25%">{{ s.fname }}</td>
+                                   <td width="20%">{{ s.frname }}</td>
+                                   <td width="10%">{{ s.sip }}</td>
+			           {% if s.s_status == "Suspended" %}
+                                         <td bgcolor="#FF0000" width="10%">{{ s.s_status }}</td>
+                                   {% else %}
+                                         <td width="10%">{{ s.s_status }}</td>
+                                   {% endif %}
+                                   <td width="10%">{{ s.uptime }}</td>
+                                   <td width="10%">{{ s.s_type }}</td>
+                                 </tr>
+                              {% endfor %}
+                        </tbody>
+
+    		</table>
+{% endblock %}

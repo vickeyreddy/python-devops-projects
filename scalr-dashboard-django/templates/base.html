@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+        <head>
+                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+                <meta charset="utf-8" />
+                <meta name="description" content="GE-Digital InternalDashboard">
+                <meta name="author" content="Vijay Singh Gosai">
+                <link rel="icon" href="{% static 'assets/images/icon.ico' %}">
+                <title>GE-Digital TechSolns-Dashboard</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+                <!-- bootstrap & fontawesome -->
+                <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+                <link rel="stylesheet" href="{% static 'assets/font-awesome/4.5.0/css/font-awesome.min.css' %}" />
+                <!-- text fonts -->
+                <link rel="stylesheet" href="{% static 'assets/css/fonts.googleapis.com.css' %}" />
+                <link rel="stylesheet" href="{% static 'assets/css/ace.min.css' %}" class="ace-main-stylesheet" id="main-ace-style" />
+                <link rel="stylesheet" href="{% static 'assets/css/ace-skins.min.css' %}" />
+                <link rel="stylesheet" href="{% static 'assets/css/ace-rtl.min.css' %}" />
+                <link rel="stylesheet" href="{% static 'assets/css/dataTables.bootstrap.min.css' %}" />
+                <script src="{% static 'assets/js/ace-extra.min.js' %}"></script>
+                {% block head %}
+
+                {% endblock %}
+        </head>
+
+<body class="no-skin">
+  <div id="navbar" class="navbar navbar-default ace-save-state">
+    <div class="navbar-container ace-save-state" id="navbar-container">
+      <div class="container-fluid">
+          <div class="navbar-header pull-left">
+              <a href="/dashboard" class="navbar-brand">
+                <small><img style="max-width:40px" src="{% static 'assets/images/icon.ico' %}">Imagination at Work</small>
+              </a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+               <li><a href="/dashboard/"><strong>Dashboard</strong></a></li>
+               <li><a href="/dashboard/envs/"><strong>Environments</strong></a></li>
+               <li><a href="/dashboard/farms/"><strong>Farms</strong></a></li>
+               <li><a href="/dashboard/farmroles/"><strong>FarmRoles</strong></a></li>
+               <li><a href="/dashboard/servers/"><strong>Servers</strong></a></li>
+               <li><a href="/dashboard/gelanservers/"><strong>InternalApps</strong></a></li>
+            </ul>
+            </div>
+          </div>
+        </div><!-- /.navbar-container -->
+       </div>
+
+ <div class="main-container ace-save-state" id="main-container">
+   <div id="sidebar" class="sidebar responsive ace-save-state">
+     <ul class="nav nav-list">
+		<li class="active">
+         <a href="/dashboard">
+            <i class="menu-icon fa fa-tachometer"></i>
+                <span class="menu-text"> Dashboard </span>
+         </a>
+                        <b class="arrow"></b>
+		</li>
+    <li class="">
+        <a class="dropdown-toggle">
+            <i class="menu-icon fa fa-tachometer"></i>
+            <span class="menu-text">M/Monit</span>
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+            <b class="arrow"></b>
+        <ul class="submenu">
+            <li class="">
+                <a href="http://mmonit.corporate.ge.com" target="_blank">
+                    <i class="menu-icon fa fa-caret-right"></i>
+                          M/Monit (Production)
+                </a>
+                    <b class="arrow"></b>
+            </li>
+            <li class="">
+                <a href="http://stage.mmonit.corporate.ge.com:9080" target="_blank">
+                    <i class="menu-icon fa fa-caret-right"></i>
+                        M/Monit (Non-Prod)
+                </a>
+                    <b class="arrow"></b>
+            </li>
+        </ul>
+    </li>
+		<li class="">
+            <a href="https://scalr.corporate.ge.com/#/servers" target="_blank">
+                <i class="menu-icon fa fa-tachometer"></i>
+                <span class="menu-text">Scalr</span>
+            </a>
+                <b class="arrow"></b>
+		</li>
+        <li class="">
+          <a href="https://tracktion.gedigitalmedia.com/jira/secure/Dashboard.jspa" target="_blank">
+            <i class="menu-icon fa fa-tachometer"></i>
+            <span class="menu-text">Chef</span>
+          </a>
+              <b class="arrow"></b>
+        </li>
+                <li class="">
+          <a class="dropdown-toggle">
+            <i class="menu-icon fa fa-tachometer"></i>
+            <span class="menu-text">Gitlab</span>
+            <b class="arrow fa fa-angle-down"></b>
+          </a>
+                <b class="arrow"></b>
+          <ul class="submenu">
+              <li class="">
+                <a href="https://gitlab.cloud.corporate.ge.com/" target="_blank">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                    Cloud-Gitlab
+                </a>
+                  <b class="arrow"></b>
+              </li>
+              <li class="">
+                <a href="https://gitlab.corporate.ge.com/" target="_blank">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                        Corporate-Gitlab
+                </a>
+                    <b class="arrow"></b>
+              </li>
+           </ul>
+        </li>
+                <li class="">
+          <a class="dropdown-toggle">
+            <i class="menu-icon fa fa-tachometer"></i>
+            <span class="menu-text">ICINGA</span>
+            <b class="arrow fa fa-angle-down"></b>
+          </a>
+                <b class="arrow"></b>
+          <ul class="submenu">
+              <li class="">
+                <a href="https://eut-monitor.cloud.corporate.ge.com/icingaweb2/" target="_blank">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                   Icinga (Cloud)
+                </a>
+                  <b class="arrow"></b>
+              </li>
+              <li class="">
+                <a href="https://dtcmonitor.corporate.ge.com/icinga/" target="_blank">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                       Icinga (Prod Internal) 
+                </a>
+                    <b class="arrow"></b>
+              </li>
+              <li class="">
+                <a href="https://stage.dtcmonitor.corporate.ge.com//icinga/" target="_blank">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                        Stage-ICINGA
+                </a>
+                    <b class="arrow"></b>
+              </li>
+            </ul>
+        </li>
+        <li class="">
+          <a class="dropdown-toggle">
+            <i class="menu-icon fa fa-tachometer"></i>
+            <span class="menu-text">Nexus</span>
+            <b class="arrow fa fa-angle-down"></b>
+          </a>
+                <b class="arrow"></b>
+          <ul class="submenu">
+              <li class="">
+                <a href="https://nexus.cloud.corporate.ge.com/nexus/content/repositories/corp-techsol-prod/" target="_blank">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                    Prod-Nexus
+                </a>
+                  <b class="arrow"></b>
+              </li>
+              <li class="">
+                <a href="https://nexus.cloud.corporate.ge.com/nexus/content/repositories/corp-techsol-stage/" target="_blank">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                        Stage-Nexus
+                </a>
+                    <b class="arrow"></b>
+              </li>
+              <li class="">
+                <a href="https://nexus.cloud.corporate.ge.com/nexus/content/repositories/corp-techsol-dev/" target="_blank">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                        Dev-Nexus
+                </a>
+                    <b class="arrow"></b>
+              </li>
+            </ul>
+        </li>
+                <li class="">
+          <a class="dropdown-toggle">
+            <i class="menu-icon fa fa-tachometer"></i>
+            <span class="menu-text">Metrics</span>
+            <b class="arrow fa fa-angle-down"></b>
+          </a>
+                <b class="arrow"></b>
+          <ul class="submenu">
+              <li class="">
+                <a href="https://metrics.cloud.corporate.ge.com" target="_blank">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                    Prod Metrics
+                </a>
+                  <b class="arrow"></b>
+              </li>
+              <li class="">
+                <a href="https://dev-metrics.cloud.corporate.ge.com/" target="_blank">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                    Non-Prod Metrics
+                </a>
+                    <b class="arrow"></b>
+              </li>
+            </ul>
+        </li>
+	<li class="">
+          <a class="dropdown-toggle">
+            <i class="menu-icon fa fa-tachometer"></i>
+            <span class="menu-text">Jenkins</span>
+            <b class="arrow fa fa-angle-down"></b>
+          </a>
+                <b class="arrow"></b>
+          <ul class="submenu">
+              <li class="">
+                <a href="https://jenkins.cloud.corporate.ge.com/jenkins/" target="_blank">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                    Jenkins (Cloud)
+                </a>
+                  <b class="arrow"></b>
+              </li>
+              <li class="">
+                <a href="http://jenkins.dbt.corporate.ge.com/jenkins/" target="_blank">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                        Jenkins (Prod Internal)
+                </a>
+                    <b class="arrow"></b>
+              </li>
+              <li class="">
+                <a href="http://jenkins2.dbt.corporate.ge.com/jenkins/" target="_blank">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                       Jenkins (Stage Internal) 
+                </a>
+                    <b class="arrow"></b>
+              </li>
+            </ul>
+        </li>
+		<li class="">
+          <a class="dropdown-toggle">
+            <i class="menu-icon fa fa-tachometer"></i>
+            <span class="menu-text">GE Repo</span>
+            <b class="arrow fa fa-angle-down"></b>
+          </a>
+                <b class="arrow"></b>
+          <ul class="submenu">
+              <li class="">
+                <a href="http://rpm.dbt.corporate.ge.com/rpm/EL/custom/" target="_blank">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                    GE Repo (Prod Internal)
+                </a>
+                  <b class="arrow"></b>
+              </li>
+              <li class="">
+                <a href="http://rpm.dbt.corporate.ge.com/rpm/EL/stage/" target="_blank">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                      GE Repo (Stage Internal)
+                </a>
+                    <b class="arrow"></b>
+              </li>
+            </ul>
+        </li>
+		<li class="">
+          <a class="dropdown-toggle">
+            <i class="menu-icon fa fa-tachometer"></i>
+             <span class="menu-text">GE Wiki</span>
+            <b class="arrow fa fa-angle-down"></b>
+          </a>
+           <b class="arrow"></b>
+			<ul class="submenu">
+			  <li class="">
+				<a href="http://wiki.corporate.ge.com/wiki/AWS_Techsolutions_Devops" target="_blank">
+				 <i class="menu-icon fa fa-caret-right"></i>
+					Cloud-Wiki
+			   </a>
+				  <b class="arrow"></b>
+			  </li>
+			 <li class="">
+			   <a href="http://wiki.corporate.ge.com/wiki" target="_blank">
+				  <i class="menu-icon fa fa-caret-right"></i>
+					Corporate-Wiki
+			  </a>
+				  <b class="arrow"></b>
+			  </li>
+			 </ul>
+		</li>
+        <li class="">
+          <a href="https://tracktion.gedigitalmedia.com/jira/secure/Dashboard.jspa" target="_blank">
+            <i class="menu-icon fa fa-tachometer"></i>
+            <span class="menu-text">JIRA</span>
+          </a>
+              <b class="arrow"></b>
+        </li>
+        <li class="">
+             <a href="https://ge-eut.slack.com/" target="_blank">
+                <i class="menu-icon fa fa-tachometer"></i>
+                <span class="menu-text">Slack</span>
+            </a>
+                <b class="arrow"></b>
+        </li>
+      <li class="">
+           <a href="https://rpm.newrelic.com/accounts/185729/applications" target="_blank">
+                <i class="menu-icon fa fa-tachometer"></i>
+                <span class="menu-text">NewRelic</span>
+            </a>
+                <b class="arrow"></b>
+      </li>
+
+      <li class="">
+            <a href="https://ge.service-now.com/" target="_blank">
+                <i class="menu-icon fa fa-tachometer"></i>
+                <span class="menu-text">ServiceNow</span>
+            </a>
+                <b class="arrow"></b>
+      </li>
+    </ul><!-- /.nav-list -->
+
+  <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+      <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="main-content-inner">
+    <div class="page-content">
+        <div class="page-header">
+           <h1>TechSolns DevOps Scalr Dashboard
+                <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        <strong>{{ title }}</strong>
+                </small>
+           </h1>
+        </div><!-- /.page-header -->
+ {% block content %}
+
+ {% endblock %}
+
+  </div><!-- /.page-content -->
+ </div><!-- /.main-content -->
+</div>
+
+ <div class="footer">
+     <div class="footer-inner">
+        <div class="footer-content">
+           <span class="bigger-120">
+                <span class="blue bolder">GE-Digital</span>
+                        &copy; 2017 General Electric Company
+                </span>
+          </div>
+      </div>
+   </div>
+
+</div><!-- /.main-container -->
+                <script src="{% static 'assets/js/jquery-2.1.4.min.js' %}"></script>
+                <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+                <script src="{% static 'assets/js/easypiechart.js' %}"></script>
+                <script src="{% static 'assets/js/easypiechart-data.js' %}"></script>
+                <script src="{% static 'assets/js/ace-elements.min.js' %}"></script>
+                <script src="{% static 'assets/js/ace.min.js' %}"></script>
+                <script src="{% static 'assets/js/jquery.dataTables.min.js' %}"></script>
+                <script src="{% static 'assets/js/dataTables.bootstrap.min.js' %}"></script>
+                {% block script %}
+
+                {% endblock %}
+        </body>
+</html>

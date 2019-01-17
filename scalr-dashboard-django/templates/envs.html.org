@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block head %}
+    <link href="{% static 'css/scalr.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+		<br><h3 align="center"><b> Tech Solution Scalr {{ title }} Details</b></h3></br>
+	<table class="table table-bordered" style="font-family:Georgia;font-size:150%;width:100%">
+					<thead>
+					  <tr class="info" align="center">
+						<th>S. No.</th>
+						<th>Environment ID</th>
+						<th>Environment Name</th>
+					  </tr>
+					</thead>
+					<tbody>
+					{% for e in env_list %}
+					  <tr>
+						<td width="10%">{{ forloop.counter }}</td>
+						<td width="20%">{{ e.eid }}</td>
+						<td width="60%">{{ e.env_name }}</td>
+					  </tr>
+					{% endfor %}
+					</tbody>
+    		</table>
+	</div>	
+{% endblock %}

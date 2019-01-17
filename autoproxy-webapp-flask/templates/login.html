@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="description" content="GE-Digital InternalDashboard">
+            <meta name="author" content="Vijay Singh Gosai">
+            <link rel="stylesheet" href="{{ url_for ('static', filename='css/bootstrap.min.css') }}">
+            <script src="{{ url_for ('static', filename='js/jquery.min.js') }}"></script>
+            <script src="{{ url_for ('static', filename='js/bootstrap.min.js') }}"></script>
+            <link rel="icon" href="{{ url_for ('static', filename='images/geicon.ico') }}">
+            <title>Autoproxy Frontend Tool</title>
+            <link rel="stylesheet" href="{{ url_for ('static', filename='css/login/css/normalize.css') }}">
+			      <link rel="stylesheet" href="{{ url_for ('static', filename='css/login/css/style.css') }}">
+			      <script src="{{ url_for ('static', filename='js/login/js/prefixfree.min.js') }}"></script>
+            <script src="{{ url_for ('static', filename='js/login/js/index.js') }}"></script>
+    </head>
+
+  <body>
+    <div class="login">
+		    <h1><a><img style="max-width:60px;" src="{{ url_for ('static', filename='images/icon.ico') }}"></a> Autoproxy Frontend Login</h1>
+        		<form method="post">
+        			<input type="text" name="username" placeholder="Username" required="required" />
+        			<input type="password" name="password" placeholder="Password" required="required" />
+        			<button type="submit" class="btn btn-primary btn-block btn-large">Login</button>
+        		</form>
+  	</div>
+    {% if error %}
+        <div class="alert alert-danger">
+           <stronge>{{ error }}</stronge>
+        </div>
+    {% endif %}
+  </body>
+</html>

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+   <div class="row">
+    <div class="col-md-12">
+      <table id="simple-table" class="table table-bordered table-hover">
+        <thead>
+	    <tr>
+		<th class="detail-col">S.No.</th>
+		<th class="detail-col">Application</th>
+		<th class="detail-col">Environment</th>
+		<th class="detail-col">HostName</th>
+		<th class="detail-col">Status</th>
+	    </tr>
+	</thead>
+	<tbody>
+	{% for s in gelan_servers %}
+	    <tr>
+		<td class="center">{{ forloop.counter }}</td>
+		<td class="center">{{ s.appname }}</td>
+		<td class="center">{{ s.ename }}</td>
+		<td class="center">{{ s.hostname }}</td>
+		<td class="center">{{ s.status }}</td>
+    	    </tr>
+	{% endfor %}
+	</tbody>
+    </table>
+  </div><!-- /.col -->
+ </div><!-- /.row -->
+{% endblock %}
+{% block script %}
+        <script>
+                $(document).ready(function() {
+                   $('#simple-table').DataTable();
+                } );
+        </script>
+{% endblock %}

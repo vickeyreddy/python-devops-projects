@@ -1,0 +1,6 @@
+Django==1.9
+requests==2.11.1
+scalr==0.3.66
+six==1.10.0
+virtualenv==15.0.3
+Werkzeug==0.11.11

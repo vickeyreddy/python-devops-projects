@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="{% static 'js/jquery-2.1.4.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/pie-chart.js' %}" type="text/javascript"></script>
+    <link href="{% static 'css/scalr.css' %}" rel="stylesheet">
+    <script src="{% static 'js/scalr.js' %}" type="text/javascript"></script>
+</head>
+<body>
+<div id="demo-pie-1" class="pie-title-center" data-percent="55">
+    <span class="pie-value"></span>
+</div>
+
+<div id="demo-pie-2" class="pie-title-center" data-percent="87">
+    <span class="pie-value"></span>
+</div>
+
+<div id="demo-pie-3" class="pie-title-center" data-percent="65">
+    <span class="pie-value"></span>
+</div>
+
+<div id="demo-pie-4" class="pie-title-center" data-percent="95">
+    <span class="pie-value"></span>
+</div>
+
+</body>
+</html>

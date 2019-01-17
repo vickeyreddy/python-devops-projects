@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+ <div class="row">
+  <div class="col-md-12">
+    <table id="simple-table" class="table table-bordered table-hover">
+	<thead>
+           <tr>
+		<th class="detail-col">S.No.</th>
+		<th class="detail-col">FarmID</th>
+		<th class="detail-col">EnvironmentName</th>
+		<th class="detail-col">FarmName</th>
+		<th class="detail-col">RoleName</th>
+		<th class="detail-col">RoleAlias</th>
+		<th class="detail-col">MinInst</th>
+		<th class="detail-col">MaxInst</th>
+	    </tr>
+	</thead>
+	<tbody>
+          {% for f in farmrole_list %}
+	    <tr>
+		<td class="center">{{ forloop.counter }}</td>
+		<td class="center">{{ f.rid }}</td>
+		<td class="center">{{ f.ename }}</td>
+		<td class="center">{{ f.fname }}</td>
+		<td class="center">{{ f.r_name }}</td>
+		<td class="center">{{ f.r_alias }}</td>
+		<td class="center">{{ f.r_min }}</td>
+		<td class="center">{{ f.r_max }}</td>
+	    </tr>
+	 {% endfor %}
+	</tbody>
+   </table>
+  </div><!-- /.col -->
+ </div><!-- /.row -->
+{% endblock %}
+{% block script %}
+        <script>
+                $(document).ready(function() {
+                   $('#simple-table').DataTable();
+                } );
+        </script>
+{% endblock %}

@@ -1,0 +1,42 @@
+def app = "docker.io/vj92/flaskapp:${env.BUILD_NUMBER}"
+def swarm_manager = "192.168.1.100"
+
+node {
+
+stage 'Code Checkout'
+	checkout scm
+
+stage 'Build Image'
+
+   docker.withRegistry('https://docker.io/') {
+    	def a = docker.image("vj92/flaskapp:base")
+    	a.pull()
+    	def new_image = docker.build(app)
+
+stage 'Publish WebImage'
+    def t = tag(readFile('app.env')) 
+    new_image.push("${t}")
+    sh("docker rmi -f docker.io/vj92/flaskapp:${env.BUILD_NUMBER}")
+  }
+
+stage 'Deploy'
+  
+     docker.withServer("tcp://${swarm_manager}:2375") {
+     
+     try {
+       env.tag = tag(readFile('app.env'))
+       sh "export TAG=${env.tag}; docker stack deploy AutoProxy --compose-file docker-stack.yml" 
+     }catch(e) {
+       sh "docker service update --rollback AutoProxy"
+       error "Service update failed in production"
+     }finally {
+       sh "sleep 20 && docker service ls | grep AutoProxy"
+     }
+   }
+}
+
+def tag(inFile) {
+  def matcher = inFile =~ /TAG=(v*.*)/
+  matcher ? matcher[0][1] : null
+}
+

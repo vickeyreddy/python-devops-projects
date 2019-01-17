@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  
+  flaskapp:
+    image: "docker.io/vj92/flaskapp:${TAG}"
+    networks:
+      - mynet  
+    deploy:
+      mode: replicated
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 30s
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: continue
+        monitor: 60s
+        max_failure_ratio: 0.3
+      placement:
+        constraints: [node.role == worker]
+    #logging: 
+    #  driver: "syslog"
+    #  options:
+    #    syslog-address: "tcp://localhost:5000"
+
+networks:
+  mynet:

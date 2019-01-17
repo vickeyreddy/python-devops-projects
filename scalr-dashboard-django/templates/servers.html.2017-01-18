@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block content %}
+   <div class="row">
+    <div class="col-md-12">
+      <table id="simple-table" class="table table-bordered table-hover">
+        <thead>
+	    <tr>
+		<th class="detail-col">S.No.</th>
+		<th class="detail-col">EnvironmentName</th>
+		<th class="detail-col">FarmName</th>
+		<th class="detail-col">FarmRoleName</th>
+		<th class="detail-col">IPAddress</th>
+		<th class="detail-col">Status</th>
+		<th class="detail-col">Uptime</th>
+		<th class="detail-col">InstnaceType</th>
+	    </tr>
+	</thead>
+	<tbody>
+	{% for s in servers_list %}
+	    <tr>
+		<td class="center">{{ forloop.counter }}</td>
+		<td class="center">{{ s.ename }}</td>
+		<td class="center">{{ s.fname }}</td>
+		<td class="center">{{ s.frname }}</td>
+		<td class="center">
+		<a href="#" data-toggle="modal" data-load-url="/serverinfo/{{s.sip}}/" data-target="#myModal">{{ s.sip }}</a>
+		
+		<!--a href="/serverinfo/{{s.sip}}/" data-toggle="modal" data-target=".bd-example-modal-lg">
+		{{ s.sip }}
+		</a--></td>
+		{% if s.s_status == "Suspended" %}
+		 	<td class="center">
+				<span class="label label-sm label-danger">{{ s.s_status }}</span>
+			</td>
+		{% elif s.s_status == "Initializing" %}
+			<td class="center">
+				<span class="label label-sm label-warning">{{ s.s_status }}</span>
+			</td>
+		{% elif s.s_status == "Terminated" %}
+			<td class="center">
+				<span class="label label-sm label-danger">{{ s.s_status }}</span>
+			</td>
+		{% else %}
+			<td class="center">
+				<span class="label label-sm label-success">{{ s.s_status }}</span>
+			</td>
+                {% endif %}
+		<td class="center">{{ s.uptime }}</td>
+		<td class="center">{{ s.s_type }}</td>
+    	    </tr>
+	{% endfor %}
+	</tbody>
+    </table>
+	
+  <!--div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel"><b>Server Extended Information</b></h4>
+            </div>
+            <div class="modal-body">
+                <h3>s.s</h3>
+           </div>
+        <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div-->
+  </div><!-- /.col -->
+ </div><!-- /.row -->
+{% endblock %}
+{% block script %}
+        <script>
+                $(document).ready(function() {
+                   $('#simple-table').DataTable();
+                } );
+        </script>
+	<script>
+		$('#myModal').on('show.bs.modal', function (e) {
+   	 		var loadurl = e.relatedTarget.data('load-url');
+			$(this).find('.modal-body').load(loadurl);
+		});
+	</script>
+{% endblock %}

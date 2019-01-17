@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block head %}
+    <link href="{% static 'css/scalr.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+		<br><h3 align="center"><b>Tech Solutions Scalr {{ title }} Details</b></h3></br>
+		<table class="table table-bordered" style="font-family:Georgia;font-size:120%;width:100%">
+                       <thead>
+                         <tr class="info">
+				<th>FarmID</th>
+				<th>EnvName</th>
+				<th>FarmName</th>
+				<th>RoleName</th>
+				<th>RoleAlias</th>
+				<th>MinInst</th>
+				<th>MaxInst</th>
+			  </tr>
+			</thead>
+			<tbody>
+                              {% for f in farmrole_list %}
+                                <tr>
+                                   <td width="5%">{{ f.rid }}</td>
+                                   <td width="15%">{{ f.ename }}</td>
+                                   <td width="20%">{{ f.fname }}</td>
+                                   <td width="25%">{{ f.r_name }}</td>
+                                   <td width="25%">{{ f.r_alias }}</td>
+                                   <td width="5%">{{ f.r_min }}</td>
+                                   <td width="5%">{{ f.r_max }}</td>
+                                 </tr>
+                              {% endfor %}
+			</tbody>
+    		</table>
+{% endblock %}
