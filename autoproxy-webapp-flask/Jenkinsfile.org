@@ -40,3 +40,21 @@ def tag(inFile) {
   matcher ? matcher[0][1] : null
 }
 
+node{
+   
+   stage("App Build started"){
+      echo 'App build started..'
+      git credentialsId: 'Github-ID', url: 'https://github.com/vickeyreddy/python-docker.git'
+      }
+   
+   stage('Docker Build') {
+     def app = docker.build "vickeyreddy/python-docker"
+    }
+   
+   stage("Tag & Push image"){
+      withDockerRegistry([credentialsId: 'dockerID',url: ""]) {
+          sh 'docker tag vickeyreddy/python-docker vickeyreddy/python-docker:001'
+          sh 'docker push vickeyreddy/python-docker:001'
+          sh 'docker push vickeyreddy/python-docker:latest'
+      }
+    }
